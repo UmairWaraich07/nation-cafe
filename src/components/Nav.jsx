@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 const links = [
   { label: 'About', href: '#about' },
@@ -46,6 +47,7 @@ function MagneticCTA({ children }) {
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -127,7 +129,17 @@ export default function Nav() {
           ))}
         </div>
 
-        <MagneticCTA>Join Waitlist</MagneticCTA>
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+          <motion.button
+            onClick={() => navigate('/login')}
+            whileHover={{ color: '#1C1C1C' }}
+            whileTap={{ scale: 0.96 }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 600, color: '#6B6B6B', fontFamily: 'inherit', padding: '8px 12px' }}
+          >
+            Log in
+          </motion.button>
+          <MagneticCTA>Join Waitlist</MagneticCTA>
+        </div>
       </div>
     </motion.nav>
   )

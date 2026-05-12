@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Problem from './components/Problem'
@@ -9,8 +10,10 @@ import Partnerships from './components/Partnerships'
 import Discount from './components/Discount'
 import CTASection from './components/CTASection'
 import Footer from './components/Footer'
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
 
-export default function App() {
+function Landing() {
   return (
     <div style={{ fontFamily: "'Outfit', sans-serif", background: '#FFFFFF', minHeight: '100vh' }}>
       <Nav />
@@ -25,5 +28,19 @@ export default function App() {
       <CTASection />
       <Footer />
     </div>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <div style={{ fontFamily: "'Outfit', sans-serif" }}>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
