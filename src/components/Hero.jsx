@@ -221,7 +221,7 @@ export default function Hero() {
         className="hero-img"
       >
         <motion.img
-          src="/images/hero-bg.jpg"
+          src="/images/20260512_173238.jpg"
           alt="Healthy Nation Café interior"
           style={{ width: '100%', height: '100%', objectFit: 'cover', y: imgY, scale: imgScale }}
         />
