@@ -37,12 +37,12 @@ export default function Footer() {
 
   return (
     <footer ref={ref} style={{ background: '#FFFFFF', borderTop: '1px solid #E8E8E5', padding: '60px 0 40px' }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 80px' }}>
+      <div className="hn-c" style={{ maxWidth: 1400, margin: '0 auto' }}>
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: 48, marginBottom: 48 }}
+          className="hn-g3" style={{ gap: 48, marginBottom: 48 }}
         >
           {/* Brand */}
           <div>
@@ -118,10 +118,13 @@ export default function Footer() {
       </div>
 
       <style>{`
+        footer .hn-g3 { grid-template-columns: 1.5fr 1fr 1fr !important; }
+        @media(max-width:960px){
+          footer .hn-g3 { grid-template-columns: 1fr 1fr !important; }
+        }
         @media(max-width:768px){
-          footer > div { padding: 0 24px !important; }
-          footer > div > div:first-child { grid-template-columns: 1fr !important; }
-          footer > div > div:last-child { flex-direction: column !important; align-items: flex-start !important; }
+          footer .hn-g3 { grid-template-columns: 1fr !important; gap: 32px !important; }
+          footer > div > div:last-child { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
         }
       `}</style>
     </footer>

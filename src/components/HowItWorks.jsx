@@ -36,7 +36,7 @@ export default function HowItWorks() {
 
   return (
     <section ref={ref} id="the-zones" style={{ background: '#F5F5F3', padding: '100px 0', overflow: 'hidden' }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 80px' }}>
+      <div className="hn-c" style={{ maxWidth: 1400, margin: '0 auto' }}>
 
         <motion.div
           initial={{ opacity: 0, y: 32 }}
@@ -52,9 +52,10 @@ export default function HowItWorks() {
           </h2>
         </motion.div>
 
-        <div style={{ display: 'flex', position: 'relative' }}>
+        <div className="how-row">
           {/* Animated SVG connector line */}
           <svg
+            className="how-connector"
             style={{ position: 'absolute', top: 35, left: '10%', width: '80%', height: 2, overflow: 'visible', pointerEvents: 'none', zIndex: 0 }}
             viewBox="0 0 1000 2"
             preserveAspectRatio="none"
@@ -81,7 +82,7 @@ export default function HowItWorks() {
                 duration: 0.6, delay: 0.18 * i + 0.2,
                 type: 'spring', stiffness: 80, damping: 16,
               }}
-              style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', position: 'relative', zIndex: 1 }}
+              className="how-item"
             >
               <motion.div
                 whileHover={{
@@ -97,40 +98,38 @@ export default function HowItWorks() {
                   hover: { type: 'spring', stiffness: 350, damping: 18 },
                   boxShadow: { duration: 2.5, repeat: Infinity, delay: i * 0.4 },
                 }}
+                className="how-icon"
                 style={{
-                  width: 72, height: 72, borderRadius: '50%',
+                  borderRadius: '50%',
                   background: '#FFFFFF', border: '2px solid #E8E8E5',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#C0392B', marginBottom: 24,
+                  color: '#C0392B',
                   boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
                 }}
               >
                 {step.icon}
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ type: 'spring', stiffness: 300, damping: 18, delay: 0.22 * i + 0.4 }}
-                style={{ fontSize: 12, fontWeight: 700, color: '#C0392B', marginBottom: 8, letterSpacing: '0.06em' }}
-              >
-                STEP {step.n}
-              </motion.div>
+              <div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={inView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ type: 'spring', stiffness: 300, damping: 18, delay: 0.22 * i + 0.4 }}
+                  style={{ fontSize: 12, fontWeight: 700, color: '#C0392B', marginBottom: 8, letterSpacing: '0.06em' }}
+                >
+                  STEP {step.n}
+                </motion.div>
 
-              <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1C1C1C', marginBottom: 10, letterSpacing: '-0.2px' }}>
-                {step.title}
-              </h3>
-              <p style={{ fontSize: 13, color: '#6B6B6B', lineHeight: 1.65, maxWidth: '18ch' }}>{step.desc}</p>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1C1C1C', marginBottom: 10, letterSpacing: '-0.2px' }}>
+                  {step.title}
+                </h3>
+                <p style={{ fontSize: 13, color: '#6B6B6B', lineHeight: 1.65, maxWidth: '18ch' }}>{step.desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      <style>{`@media(max-width:768px){
-        section > div { padding: 0 24px !important; }
-        section > div > div:last-child { flex-direction: column !important; gap: 36px !important; }
-        svg[style] { display: none !important; }
-      }`}</style>
     </section>
   )
 }

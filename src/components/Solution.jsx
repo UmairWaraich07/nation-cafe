@@ -27,13 +27,13 @@ export default function Solution() {
 
   return (
     <section ref={ref} style={{ background: '#FFFFFF', padding: '100px 0' }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 80px' }}>
+      <div className="hn-c" style={{ maxWidth: 1400, margin: '0 auto' }}>
 
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          style={{ marginBottom: 72, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24 }}
+          style={{ marginBottom: 72, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, rowGap: 20 }}
         >
           <div>
             <div style={{ display: 'inline-block', background: '#FEF9EC', border: '1px solid #F5D76E', borderRadius: 100, padding: '5px 14px', marginBottom: 16 }}>
@@ -52,7 +52,7 @@ export default function Solution() {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 2, background: '#E8E8E5', borderRadius: 24, overflow: 'hidden' }}
+          className="hn-g4" style={{ gap: 2, background: '#E8E8E5', borderRadius: 24, overflow: 'hidden' }}
         >
           {pillars.map((p) => (
             <motion.div
@@ -80,10 +80,6 @@ export default function Solution() {
         </motion.div>
       </div>
 
-      <style>{`@media(max-width:768px){
-        section > div { padding: 0 24px !important; }
-        section > div > div:last-child { grid-template-columns: 1fr !important; gap: 1px !important; }
-      }`}</style>
     </section>
   )
 }

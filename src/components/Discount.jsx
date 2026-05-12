@@ -76,7 +76,7 @@ export default function Discount() {
 
   return (
     <section ref={ref} style={{ background: '#F5F5F3', padding: '100px 0' }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 80px' }}>
+      <div className="hn-c" style={{ maxWidth: 1400, margin: '0 auto' }}>
 
         <motion.div
           initial={{ opacity: 0, y: 32 }}
@@ -97,7 +97,7 @@ export default function Discount() {
           variants={cardContainer}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, marginBottom: 48 }}
+          className="hn-g3" style={{ gap: 20, marginBottom: 48 }}
         >
           {heroGroups.map((g, i) => (
             <motion.div
@@ -142,7 +142,7 @@ export default function Discount() {
           <p style={{ fontSize: 14, color: '#6B6B6B', marginBottom: 28 }}>
             Rewards scale with your commitment. The more consistent your training, the deeper your discount.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+          <div className="hn-g3" style={{ gap: 16 }}>
             {tiers.map((t, i) => (
               <motion.div
                 key={t.name}
@@ -167,13 +167,6 @@ export default function Discount() {
         </motion.div>
       </div>
 
-      <style>{`
-        @media(max-width:768px){
-          section > div { padding: 0 24px !important; }
-          section > div > div:nth-child(2) { grid-template-columns: 1fr !important; }
-          section > div > div:last-child > div:last-child { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </section>
   )
 }

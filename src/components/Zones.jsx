@@ -108,7 +108,7 @@ export default function Zones() {
 
   return (
     <section ref={ref} id="zones" style={{ background: '#FFFFFF', padding: '100px 0' }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 80px' }}>
+      <div className="hn-c" style={{ maxWidth: 1400, margin: '0 auto' }}>
 
         <motion.div
           initial={{ opacity: 0, y: 32 }}
@@ -129,7 +129,7 @@ export default function Zones() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          style={{ display: 'flex', justifyContent: 'center', marginBottom: 40 }}
+          className="zone-tabs-outer" style={{ marginBottom: 40 }}
         >
           <div style={{ display: 'inline-flex', background: '#F5F5F3', borderRadius: 14, padding: 4, gap: 4, position: 'relative' }}>
             {[
@@ -178,9 +178,9 @@ export default function Zones() {
               background: isLair ? '#2A1F1A' : '#FDF6F0',
             }}
           >
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr' }}>
+            <div className="zone-panel-grid">
               {/* Left: info */}
-              <div style={{ padding: '56px 56px 60px' }}>
+              <div className="zone-info">
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -231,7 +231,7 @@ export default function Zones() {
                     : 'Light. Balanced. Lighter portions with precision macro balance and aesthetic plating designed for mindful eating.'}
                 </motion.p>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
+                <div className="zone-stats">
                   {isLair ? (
                     <>
                       <AnimatedStat value="2800+" label="Daily calories" light={false} inView={inView} delay={0.4} />
@@ -249,8 +249,8 @@ export default function Zones() {
               </div>
 
               {/* Right: 3D tilt gallery */}
-              <div style={{ padding: '40px 40px 40px 20px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, height: '100%' }}>
+              <div className="zone-img-right">
+                <div className="zone-img-grid">
                   {images.map((img, i) => (
                     <TiltImage key={img.src} src={img.src} alt={img.alt} delay={0.15 * i} inView={inView} />
                   ))}
@@ -261,14 +261,6 @@ export default function Zones() {
         </AnimatePresence>
       </div>
 
-      <style>{`
-        @media(max-width:900px){
-          section > div > div:last-child > div > div { grid-template-columns: 1fr !important; }
-        }
-        @media(max-width:768px){
-          section > div { padding: 0 24px !important; }
-        }
-      `}</style>
     </section>
   )
 }

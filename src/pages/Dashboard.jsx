@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { createPortal } from 'react-dom'
 
 /* ─── Mock Data ──────────────────────────────────────────────────── */
 const USER = {
@@ -118,7 +119,7 @@ function ProfileSection() {
       <SectionTitle title="My Profile" subtitle="Your personal information and fitness preferences." />
 
       {/* Avatar + tier */}
-      <Card style={{ marginBottom: 20, display: 'flex', alignItems: 'center', gap: 24 }}>
+      <Card style={{ marginBottom: 20, display: 'flex', alignItems: 'flex-start', gap: 20, flexWrap: 'wrap' }}>
         <div style={{ width: 72, height: 72, background: '#C0392B', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, fontWeight: 800, color: '#fff', flexShrink: 0 }}>
           {USER.avatar}
         </div>
@@ -138,7 +139,7 @@ function ProfileSection() {
       </Card>
 
       {/* Info grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
+      <div className="dash-g2" style={{ gap: 12 }}>
         {fields.map(([label, value]) => (
           <Card key={label} style={{ padding: '20px 24px' }}>
             <div style={{ fontSize: 12, fontWeight: 600, color: '#6B6B6B', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 6 }}>{label}</div>
@@ -158,7 +159,7 @@ function HealthSection() {
       <SectionTitle title="Health & Fitness Tracking" subtitle="Live data from your connected devices. Mock data for demo." />
 
       {/* Integrations */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 20 }}>
+      <div className="dash-g4" style={{ gap: 12, marginBottom: 20 }}>
         {INTEGRATIONS.map(intg => (
           <Card key={intg.name} style={{ padding: '18px 20px', display: 'flex', flexDirection: 'column', gap: 10 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -175,7 +176,7 @@ function HealthSection() {
       </div>
 
       {/* Metrics */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 20 }}>
+      <div className="dash-g3" style={{ gap: 12, marginBottom: 20 }}>
         {HEALTH_METRICS.map((m, i) => (
           <motion.div
             key={m.label}
@@ -244,7 +245,7 @@ function LoyaltySection() {
       <SectionTitle title="Loyalty & Cashback" subtitle="Track your rewards, tier status, and available bonuses." />
 
       {/* Balance cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 20 }}>
+      <div className="dash-g3" style={{ gap: 16, marginBottom: 20 }}>
         {[
           { label: 'Cashback Balance', value: 'SAR 142', sub: 'Available to redeem', color: '#C0392B', bg: '#FEF3F2' },
           { label: 'Reward Points', value: '3,840 pts', sub: '≈ SAR 38 value', color: '#B8962E', bg: '#FEF9EC' },
@@ -264,7 +265,7 @@ function LoyaltySection() {
           <div style={{ fontSize: 15, fontWeight: 700, color: '#1C1C1C' }}>Membership Tier</div>
           <Badge>Gold Member</Badge>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+        <div className="dash-g3" style={{ gap: 12 }}>
           {tiers.map((t, i) => (
             <div key={t.name} style={{ padding: '16px', background: '#F5F5F3', borderRadius: 12, borderTop: `3px solid ${t.color}` }}>
               <div style={{ fontSize: 18, fontWeight: 800, color: t.color, marginBottom: 4 }}>{t.pct === 66 ? '20%' : t.pct === 33 ? '10%' : '30%'} off</div>
@@ -305,7 +306,7 @@ function VisitsSection() {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
       <SectionTitle title="Visit History" subtitle="Your check-ins, activity timeline, and zone usage." />
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 20 }}>
+      <div className="dash-g3" style={{ gap: 16, marginBottom: 20 }}>
         {[
           { label: 'Total Visits', value: '47' },
           { label: 'This Month', value: '12' },
@@ -387,7 +388,7 @@ function DeliverySection() {
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
       <SectionTitle title="Delivery Management" subtitle="Delivery history, saved addresses, and preferences." />
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 20 }}>
+      <div className="dash-g2" style={{ gap: 16, marginBottom: 20 }}>
         <Card>
           <div style={{ fontSize: 14, fontWeight: 700, color: '#1C1C1C', marginBottom: 14 }}>Saved Addresses</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -462,7 +463,7 @@ function AISection() {
       </div>
 
       {/* Insights */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14, marginBottom: 20 }}>
+      <div className="dash-g2" style={{ gap: 14, marginBottom: 20 }}>
         {AI_INSIGHTS.map((insight, i) => (
           <motion.div
             key={insight.title}
@@ -484,7 +485,7 @@ function AISection() {
       {/* Future features */}
       <Card>
         <div style={{ fontSize: 15, fontWeight: 700, color: '#1C1C1C', marginBottom: 16 }}>Planned Features</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
+        <div className="dash-g3" style={{ gap: 10 }}>
           {[
             ['🍽️', 'Meal Planning', 'Weekly personalised meal plans based on training schedule'],
             ['📊', 'Macro Tracking', 'Automatic macro logging from café orders'],
@@ -516,106 +517,190 @@ const SECTIONS = {
   ai: AISection,
 }
 
-export default function Dashboard() {
-  const [active, setActive] = useState('profile')
-  const navigate = useNavigate()
-  const ActiveSection = SECTIONS[active]
-
+/* ─── Sidebar inner content (shared between desktop + mobile drawer) ── */
+function SidebarContent({ active, setActive, navigate, onNavClick }) {
   return (
-    <div style={{ minHeight: '100dvh', background: '#F5F5F3', fontFamily: "'Outfit', sans-serif", display: 'flex' }}>
-      {/* Sidebar */}
-      <motion.aside
-        initial={{ x: -40, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          width: 260, flexShrink: 0, background: '#FFFFFF',
-          borderRight: '1px solid #E8E8E5',
-          display: 'flex', flexDirection: 'column',
-          position: 'sticky', top: 0, height: '100dvh',
-          overflowY: 'auto',
-        }}
-      >
-        {/* Logo */}
-        <div style={{ padding: '28px 24px 20px', borderBottom: '1px solid #E8E8E5' }}>
-          <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{ width: 32, height: 32, background: '#C0392B', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ color: '#fff', fontWeight: 800, fontSize: 13 }}>HN</span>
-            </div>
-            <span style={{ fontWeight: 700, fontSize: 16, color: '#1C1C1C', letterSpacing: '-0.2px' }}>Healthy Nation</span>
-          </a>
-        </div>
+    <>
+      {/* Logo */}
+      <div style={{ padding: '28px 24px 20px', borderBottom: '1px solid #E8E8E5' }}>
+        <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ width: 32, height: 32, background: '#C0392B', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ color: '#fff', fontWeight: 800, fontSize: 13 }}>HN</span>
+          </div>
+          <span style={{ fontWeight: 700, fontSize: 16, color: '#1C1C1C', letterSpacing: '-0.2px' }}>Healthy Nation</span>
+        </a>
+      </div>
 
-        {/* User pill */}
-        <div style={{ padding: '16px 20px', borderBottom: '1px solid #E8E8E5' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: '#F5F5F3', borderRadius: 12, padding: '12px 14px' }}>
-            <div style={{ width: 36, height: 36, background: '#C0392B', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 800, color: '#fff', flexShrink: 0 }}>
-              AR
-            </div>
-            <div style={{ minWidth: 0 }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: '#1C1C1C', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{USER.name}</div>
-              <div style={{ fontSize: 11, color: '#C0392B', fontWeight: 600 }}>{USER.tier}</div>
-            </div>
+      {/* User pill */}
+      <div style={{ padding: '16px 20px', borderBottom: '1px solid #E8E8E5' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: '#F5F5F3', borderRadius: 12, padding: '12px 14px' }}>
+          <div style={{ width: 36, height: 36, background: '#C0392B', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 800, color: '#fff', flexShrink: 0 }}>
+            AR
+          </div>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: '#1C1C1C', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{USER.name}</div>
+            <div style={{ fontSize: 11, color: '#C0392B', fontWeight: 600 }}>{USER.tier}</div>
           </div>
         </div>
+      </div>
 
-        {/* Nav */}
-        <nav style={{ flex: 1, padding: '12px 12px' }}>
-          {NAV_ITEMS.map(item => (
-            <motion.button
-              key={item.id}
-              onClick={() => setActive(item.id)}
-              whileHover={{ x: 2 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-              style={{
-                width: '100%', display: 'flex', alignItems: 'center', gap: 12,
-                padding: '11px 14px', borderRadius: 10, border: 'none', cursor: 'pointer',
-                fontFamily: 'inherit', fontSize: 14, fontWeight: 600, textAlign: 'left',
-                background: active === item.id ? '#FEF3F2' : 'transparent',
-                color: active === item.id ? '#C0392B' : '#6B6B6B',
-                marginBottom: 2, transition: 'background 0.15s, color 0.15s',
-              }}
-            >
-              <span style={{ color: active === item.id ? '#C0392B' : '#6B6B6B' }}>{item.icon}</span>
-              {item.label}
-            </motion.button>
-          ))}
-        </nav>
-
-        {/* Logout */}
-        <div style={{ padding: '16px 12px', borderTop: '1px solid #E8E8E5' }}>
+      {/* Nav */}
+      <nav style={{ flex: 1, padding: '12px 12px' }}>
+        {NAV_ITEMS.map(item => (
           <motion.button
-            onClick={() => navigate('/')}
+            key={item.id}
+            onClick={() => { setActive(item.id); onNavClick && onNavClick() }}
             whileHover={{ x: 2 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
             style={{
               width: '100%', display: 'flex', alignItems: 'center', gap: 12,
               padding: '11px 14px', borderRadius: 10, border: 'none', cursor: 'pointer',
-              fontFamily: 'inherit', fontSize: 14, fontWeight: 600,
-              background: 'transparent', color: '#6B6B6B',
+              fontFamily: 'inherit', fontSize: 14, fontWeight: 600, textAlign: 'left',
+              background: active === item.id ? '#FEF3F2' : 'transparent',
+              color: active === item.id ? '#C0392B' : '#6B6B6B',
+              marginBottom: 2, transition: 'background 0.15s, color 0.15s',
             }}
           >
-            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-            </svg>
-            Log out
+            <span style={{ color: active === item.id ? '#C0392B' : '#6B6B6B' }}>{item.icon}</span>
+            {item.label}
           </motion.button>
-        </div>
+        ))}
+      </nav>
+
+      {/* Logout */}
+      <div style={{ padding: '16px 12px', borderTop: '1px solid #E8E8E5' }}>
+        <motion.button
+          onClick={() => navigate('/')}
+          whileHover={{ x: 2 }}
+          style={{
+            width: '100%', display: 'flex', alignItems: 'center', gap: 12,
+            padding: '11px 14px', borderRadius: 10, border: 'none', cursor: 'pointer',
+            fontFamily: 'inherit', fontSize: 14, fontWeight: 600,
+            background: 'transparent', color: '#6B6B6B',
+          }}
+        >
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+          </svg>
+          Log out
+        </motion.button>
+      </div>
+    </>
+  )
+}
+
+export default function Dashboard() {
+  const [active, setActive] = useState('profile')
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const navigate = useNavigate()
+  const ActiveSection = SECTIONS[active]
+  const activeLabel = NAV_ITEMS.find(n => n.id === active)?.label || 'Dashboard'
+
+  // Lock body scroll when drawer open
+  useEffect(() => {
+    document.body.style.overflow = drawerOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [drawerOpen])
+
+  // Close on Escape
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') setDrawerOpen(false) }
+    if (drawerOpen) window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [drawerOpen])
+
+  return (
+    <div className="dash-wrap" style={{ background: '#F5F5F3', fontFamily: "'Outfit', sans-serif" }}>
+
+      {/* ── Desktop Sidebar ───────────────────────────────────── */}
+      <motion.aside
+        className="dash-side"
+        initial={{ x: -40, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <SidebarContent active={active} setActive={setActive} navigate={navigate} />
       </motion.aside>
 
-      {/* Main content */}
-      <main style={{ flex: 1, padding: '40px 48px', overflowY: 'auto', maxWidth: 960 }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      {/* ── Mobile Drawer (portal) ────────────────────────────── */}
+      {createPortal(
+        <AnimatePresence>
+          {drawerOpen && (
+            <>
+              <motion.div
+                key="db-backdrop"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.22 }}
+                onClick={() => setDrawerOpen(false)}
+                style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(3px)', zIndex: 9998 }}
+              />
+              <motion.div
+                key="db-drawer"
+                initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
+                transition={{ type: 'spring', stiffness: 320, damping: 32 }}
+                style={{
+                  position: 'fixed', top: 0, left: 0, bottom: 0,
+                  width: 'min(280px, 85vw)',
+                  background: '#FFFFFF', zIndex: 9999,
+                  display: 'flex', flexDirection: 'column',
+                  boxShadow: '8px 0 40px rgba(0,0,0,0.14)',
+                  overflowY: 'auto',
+                }}
+              >
+                <SidebarContent
+                  active={active}
+                  setActive={setActive}
+                  navigate={navigate}
+                  onNavClick={() => setDrawerOpen(false)}
+                />
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+
+      {/* ── Right side: topbar + content ─────────────────────── */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+
+        {/* Mobile top bar */}
+        <div className="dash-topbar">
+          <button
+            onClick={() => setDrawerOpen(true)}
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer', padding: 8,
+              display: 'flex', flexDirection: 'column', gap: 5, borderRadius: 8,
+            }}
+            aria-label="Open menu"
           >
-            <ActiveSection />
-          </motion.div>
-        </AnimatePresence>
-      </main>
+            <span style={{ display: 'block', width: 22, height: 2, background: '#1C1C1C', borderRadius: 2 }} />
+            <span style={{ display: 'block', width: 22, height: 2, background: '#1C1C1C', borderRadius: 2 }} />
+            <span style={{ display: 'block', width: 14, height: 2, background: '#1C1C1C', borderRadius: 2, alignSelf: 'flex-end' }} />
+          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 26, height: 26, background: '#C0392B', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ color: '#fff', fontWeight: 800, fontSize: 11 }}>HN</span>
+            </div>
+            <span style={{ fontWeight: 700, fontSize: 15, color: '#1C1C1C' }}>{activeLabel}</span>
+          </div>
+          <div style={{ width: 38 }} />{/* spacer */}
+        </div>
+
+        {/* Main content */}
+        <main className="dash-main" style={{ overflowY: 'auto' }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <ActiveSection />
+            </motion.div>
+          </AnimatePresence>
+        </main>
+      </div>
     </div>
   )
 }

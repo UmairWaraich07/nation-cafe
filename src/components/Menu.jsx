@@ -101,7 +101,7 @@ export default function Menu() {
 
   return (
     <section ref={ref} id="menu" style={{ background: '#F5F5F3', padding: '100px 0' }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 80px' }}>
+      <div className="hn-c" style={{ maxWidth: 1400, margin: '0 auto' }}>
 
         {/* Header */}
         <motion.div
@@ -138,7 +138,7 @@ export default function Menu() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          style={{ display: 'flex', gap: 6, marginBottom: 36, flexWrap: 'wrap' }}
+          className="menu-tabs-row" style={{ marginBottom: 36 }}
         >
           {CATEGORIES.map(cat => (
             <button
@@ -206,7 +206,7 @@ export default function Menu() {
               variants={cardContainer}
               initial="hidden"
               animate="visible"
-              style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}
+              className="hn-g2" style={{ gap: 16 }}
             >
               {category.items.map((item) => (
                 <motion.div
@@ -250,8 +250,13 @@ export default function Menu() {
 
       <style>{`
         @media(max-width:768px){
-          section > div { padding: 0 24px !important; }
-          section > div > div:last-child > div > div:last-child { grid-template-columns: 1fr !important; }
+          #menu .menu-tabs-row + div div[style*="height: 280px"],
+          #menu .hn-c > div:last-child > div > div[style*="280px"] { height: 200px !important; }
+          #menu .hn-c > div[style*="justifyContent: space-between"],
+          #menu .hn-c > div[style*="space-between"] { flex-direction: column !important; align-items: flex-start !important; }
+        }
+        @media(max-width:480px){
+          #menu div[style*="height: 280px"] { height: 180px !important; }
         }
       `}</style>
     </section>

@@ -63,7 +63,7 @@ export default function Partnerships() {
 
   return (
     <section ref={ref} id="partnerships" style={{ background: '#FFFFFF', padding: '100px 0' }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 80px' }}>
+      <div className="hn-c" style={{ maxWidth: 1400, margin: '0 auto' }}>
 
         <motion.div
           initial={{ opacity: 0, y: 32 }}
@@ -93,7 +93,7 @@ export default function Partnerships() {
           variants={cardContainer}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}
+          className="hn-g3" style={{ gap: 24 }}
         >
           {mechanics.map((m) => (
             <motion.div
@@ -120,12 +120,6 @@ export default function Partnerships() {
         </motion.div>
       </div>
 
-      <style>{`
-        @media(max-width:768px){
-          section > div { padding: 0 24px !important; }
-          section > div > div:last-child { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </section>
   )
 }

@@ -92,7 +92,7 @@ export default function Problem() {
 
   return (
     <section ref={ref} id="about" style={{ background: '#F5F5F3', padding: '100px 0' }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 80px' }}>
+      <div className="hn-c" style={{ maxWidth: 1400, margin: '0 auto' }}>
 
         <motion.div
           initial={{ opacity: 0, y: 32 }}
@@ -112,7 +112,7 @@ export default function Problem() {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24 }}
+          className="hn-g2" style={{ gap: 24 }}
         >
           {problems.map((p, i) => (
             <SpotlightCard key={p.title} delay={0.08 * i} inView={inView}>
@@ -131,10 +131,6 @@ export default function Problem() {
         </motion.div>
       </div>
 
-      <style>{`@media(max-width:768px){
-        section > div { padding: 0 24px !important; }
-        section > div > div:last-child { grid-template-columns: 1fr !important; }
-      }`}</style>
     </section>
   )
 }

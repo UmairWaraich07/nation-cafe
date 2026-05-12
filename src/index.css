@@ -26,3 +26,182 @@ body {
   color: #1C1C1C;
   -webkit-font-smoothing: antialiased;
 }
+
+/* ─── Responsive Layout Classes ────────────────────────────────── */
+
+/* Section container */
+.hn-c {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+/* Hero */
+.hero-wrap {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+.hero-txt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 64px 80px 80px;
+}
+.hero-img {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Generic grids */
+.hn-g2 { display: grid; grid-template-columns: repeat(2, 1fr); }
+.hn-g3 { display: grid; grid-template-columns: repeat(3, 1fr); }
+.hn-g4 { display: grid; grid-template-columns: repeat(4, 1fr); }
+
+/* Zones */
+.zone-tabs-outer { display: flex; justify-content: center; margin-bottom: 40px; }
+.zone-panel-grid { display: grid; grid-template-columns: 1fr 1.4fr; }
+.zone-info { padding: 56px 56px 60px; }
+.zone-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.zone-img-right { padding: 40px 40px 40px 20px; }
+.zone-img-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; height: 100%; }
+
+/* HowItWorks */
+.how-row { display: flex; position: relative; }
+.how-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.how-icon {
+  width: 72px; height: 72px;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}
+
+/* Dashboard */
+.dash-wrap { display: flex; min-height: 100dvh; }
+.dash-side {
+  width: 260px;
+  flex-shrink: 0;
+  background: #FFFFFF;
+  border-right: 1px solid #E8E8E5;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow-y: auto;
+}
+.dash-topbar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E8E8E5;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.dash-main { flex: 1; padding: 40px 48px; overflow-y: auto; max-width: 960px; }
+.dash-g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dash-g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.dash-g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+/* ─── 960px breakpoint ──────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .hn-c { padding-left: 40px !important; padding-right: 40px !important; }
+  .hn-g3 { grid-template-columns: repeat(2, 1fr) !important; }
+  .hn-g4 { grid-template-columns: repeat(2, 1fr) !important; }
+  .zone-panel-grid { grid-template-columns: 1fr !important; }
+  .zone-img-right { padding: 0 32px 32px !important; }
+  .zone-img-grid { height: 200px !important; }
+  .dash-g4 { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* ─── 768px breakpoint ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hn-c { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Hero */
+  .hero-wrap {
+    grid-template-columns: 1fr !important;
+    padding-top: 72px;
+    min-height: unset !important;
+  }
+  .hero-txt { padding: 40px 20px 32px !important; }
+  .hero-img {
+    height: 56vw !important;
+    min-height: 220px !important;
+    max-height: 340px !important;
+  }
+
+  /* Grids */
+  .hn-g2, .hn-g3, .hn-g4 { grid-template-columns: 1fr !important; }
+
+  /* Zones */
+  .zone-tabs-outer { overflow-x: auto !important; justify-content: flex-start !important; padding-bottom: 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .zone-tabs-outer::-webkit-scrollbar { display: none; }
+  .zone-tabs-outer > div { min-width: max-content; }
+  .zone-panel-grid { grid-template-columns: 1fr !important; }
+  .zone-info { padding: 28px 20px 24px !important; }
+  .zone-stats { grid-template-columns: 1fr !important; gap: 8px !important; }
+  .zone-img-right { padding: 0 20px 24px !important; }
+  .zone-img-grid { height: 180px !important; }
+
+  /* HowItWorks */
+  .how-row { flex-direction: column !important; gap: 20px !important; align-items: flex-start !important; }
+  .how-item { flex-direction: row !important; text-align: left !important; align-items: flex-start !important; gap: 16px !important; width: 100% !important; }
+  .how-icon { margin-bottom: 0 !important; width: 52px !important; height: 52px !important; }
+  .how-connector { display: none !important; }
+
+  /* Dashboard */
+  .dash-side { display: none !important; }
+  .dash-topbar { display: flex !important; }
+  .dash-main { padding: 16px 16px 40px !important; max-width: 100% !important; }
+  .dash-g2 { grid-template-columns: 1fr !important; }
+  .dash-g3 { grid-template-columns: repeat(2, 1fr) !important; }
+  .dash-g4 { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* ─── 480px breakpoint ──────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .hero-cta-row { flex-direction: column !important; }
+  .hero-stats-row { gap: 16px !important; flex-wrap: wrap !important; }
+  .dash-g3 { grid-template-columns: 1fr !important; }
+  .dash-g4 { grid-template-columns: 1fr !important; }
+}
+
+/* ─── Menu tabs ─────────────────────────────────────────────────── */
+.menu-tabs-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .menu-tabs-row {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .menu-tabs-row::-webkit-scrollbar { display: none; }
+  .menu-tabs-row > button { flex-shrink: 0 !important; white-space: nowrap !important; }
+
+  /* Zone stats: max 2 cols on small screens */
+  .zone-stats { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* Zone tab switcher — shrink text on mobile */
+  .zone-tabs-outer > div { width: 100% !important; display: flex !important; }
+  .zone-tabs-outer > div > button { flex: 1 !important; padding: 10px 12px !important; font-size: 13px !important; white-space: nowrap !important; }
+}

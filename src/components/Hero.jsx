@@ -103,20 +103,15 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      style={{
-        minHeight: '100dvh', display: 'grid', gridTemplateColumns: '1fr 1fr',
-        background: '#FFFFFF', paddingTop: 72, overflow: 'hidden',
-      }}
+      className="hero-wrap"
+      style={{ paddingTop: 72 }}
     >
       {/* ── Left: text ─────────────────────────────────────── */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        style={{
-          display: 'flex', flexDirection: 'column', justifyContent: 'center',
-          padding: '80px 64px 80px 80px',
-        }}
+        className="hero-txt"
       >
         {/* Badge */}
         <motion.div variants={itemVariants}>
@@ -179,7 +174,7 @@ export default function Hero() {
         </motion.p>
 
         {/* CTAs */}
-        <motion.div variants={itemVariants} style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+        <motion.div variants={itemVariants} className="hero-cta-row" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
           <MagneticBtn
             href="#contact"
             style={{
@@ -205,6 +200,7 @@ export default function Hero() {
         {/* Stats */}
         <motion.div
           variants={itemVariants}
+          className="hero-stats-row"
           style={{ display: 'flex', gap: 36, marginTop: 56 }}
         >
           {[
@@ -222,7 +218,7 @@ export default function Hero() {
         initial={{ opacity: 0, x: 60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        style={{ position: 'relative', overflow: 'hidden' }}
+        className="hero-img"
       >
         <motion.img
           src="/images/hero-bg.jpg"
@@ -257,13 +253,6 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      <style>{`
-        @media (max-width: 768px) {
-          section { grid-template-columns: 1fr !important; }
-          section > div:last-child { height: 320px; }
-          section > div:first-child { padding: 60px 24px 40px !important; }
-        }
-      `}</style>
     </section>
   )
 }

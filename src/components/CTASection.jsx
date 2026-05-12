@@ -57,7 +57,7 @@ export default function CTASection() {
 
   return (
     <section ref={ref} id="contact" style={{ background: '#FFFFFF', padding: '100px 0' }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 80px' }}>
+      <div className="hn-c" style={{ maxWidth: 1400, margin: '0 auto' }}>
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -72,7 +72,7 @@ export default function CTASection() {
           </p>
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+        <div className="hn-g3" style={{ gap: 24 }}>
           {/* Waitlist */}
           <motion.div initial={{ opacity: 0, y: 48, scale: 0.96 }} animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}} transition={{ duration: 0.65, delay: 0.1, type: 'spring', stiffness: 80, damping: 16 }}>
             <FormCard
@@ -168,12 +168,6 @@ export default function CTASection() {
         </div>
       </div>
 
-      <style>{`
-        @media(max-width:768px){
-          section > div { padding: 0 24px !important; }
-          section > div > div:last-child { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </section>
   )
 }
